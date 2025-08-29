@@ -1,0 +1,198 @@
+[gd_scene load_steps=11 format=4 uid="uid://cmq58m28moqx4"]
+
+[ext_resource type="Script" uid="uid://dxt48f2jy8o0y" path="res://scripts/game.gd" id="1_p57ef"]
+[ext_resource type="Script" uid="uid://b2kyrvqao3tn3" path="res://scripts/parallax_background.gd" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bn1ae34k8qe5d" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://dur757nuhnc0f" path="res://assets/Lake view small.png" id="3_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://drl03henleoq2" path="res://assets/Tileset.png" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://kjgpkci5i2wp" path="res://scenes/bird.tscn" id="3_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://d2k5xany04igs" path="res://scenes/enemy.tscn" id="5_iywne"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
+distance = 48.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
+texture = ExtResource("3_lnu2h")
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+5:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+15:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+5:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+5:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+14:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+5:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+11:5/0 = 0
+1:6/0 = 0
+3:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+14:6/0 = 0
+16:6/0 = 0
+1:7/0 = 0
+3:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+14:7/0 = 0
+16:7/0 = 0
+1:8/0 = 0
+3:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+1:9/0 = 0
+3:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+1:10/0 = 0
+3:10/0 = 0
+5:10/0 = 0
+6:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_iywne"]
+sources/0 = SubResource("TileSetAtlasSource_lbhrr")
+
+[node name="Game" type="Node"]
+script = ExtResource("1_p57ef")
+enemy_scenes = Array[PackedScene]([ExtResource("5_iywne"), ExtResource("3_u5sy4")])
+
+[node name="Player" parent="." instance=ExtResource("2_yqjtg")]
+position = Vector2(62, 45)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(72, 239)
+shape = SubResource("WorldBoundaryShape2D_yqjtg")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("2_lbhrr")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(425.9, 0)
+
+[node name="Background" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 427.0
+offset_bottom = 240.0
+texture = ExtResource("3_lbhrr")
+stretch_mode = 4
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(425.9, 0)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/ParallaxLayer2"]
+tile_map_data = PackedByteArray("AAAAAA4AAAACAAMAAAABAA4AAAACAAMAAAACAA4AAAACAAMAAAADAA4AAAACAAMAAAAEAA4AAAACAAMAAAAFAA4AAAACAAMAAAAGAA4AAAACAAMAAAAHAA4AAAACAAMAAAAIAA4AAAACAAMAAAAJAA4AAAACAAMAAAAKAA4AAAACAAMAAAALAA4AAAACAAMAAAAMAA4AAAACAAMAAAANAA4AAAACAAMAAAAOAA4AAAACAAMAAAAPAA4AAAACAAMAAAAQAA4AAAACAAMAAAARAA4AAAACAAMAAAASAA4AAAACAAMAAAATAA4AAAACAAMAAAAUAA4AAAACAAMAAAAVAA4AAAACAAMAAAAWAA4AAAACAAMAAAAXAA4AAAACAAMAAAAYAA4AAAACAAMAAAAZAA4AAAACAAMAAAAaAA4AAAACAAMAAAAAAA0AAAACAAIAAAABAA0AAAACAAIAAAACAA0AAAACAAIAAAADAA0AAAACAAIAAAAEAA0AAAACAAIAAAAFAA0AAAACAAIAAAAGAA0AAAACAAIAAAAHAA0AAAACAAIAAAAIAA0AAAACAAIAAAAJAA0AAAACAAIAAAAKAA0AAAACAAIAAAALAA0AAAACAAIAAAAMAA0AAAACAAIAAAANAA0AAAACAAIAAAAOAA0AAAACAAIAAAAPAA0AAAACAAIAAAAQAA0AAAACAAIAAAARAA0AAAACAAIAAAASAA0AAAACAAIAAAATAA0AAAACAAIAAAAUAA0AAAACAAIAAAAVAA0AAAACAAIAAAAWAA0AAAACAAIAAAAXAA0AAAACAAIAAAAYAA0AAAACAAIAAAAZAA0AAAACAAIAAAAaAA0AAAACAAIAAAAAAAwAAAACAAEAAAABAAwAAAACAAEAAAACAAwAAAACAAEAAAADAAwAAAACAAEAAAAEAAwAAAACAAEAAAAFAAwAAAACAAEAAAAGAAwAAAACAAEAAAAHAAwAAAACAAEAAAAIAAwAAAACAAEAAAAJAAwAAAACAAEAAAAKAAwAAAACAAEAAAALAAwAAAACAAEAAAAMAAwAAAACAAEAAAANAAwAAAACAAEAAAAOAAwAAAACAAEAAAAPAAwAAAACAAEAAAAQAAwAAAACAAEAAAARAAwAAAACAAEAAAASAAwAAAACAAEAAAATAAwAAAACAAEAAAAUAAwAAAACAAEAAAAVAAwAAAACAAEAAAAWAAwAAAACAAEAAAAXAAwAAAACAAEAAAAYAAwAAAACAAEAAAAZAAwAAAACAAEAAAAaAAwAAAACAAEAAAAAAAsAAAACAAAAAAABAAsAAAACAAAAAAACAAsAAAACAAAAAAADAAsAAAACAAAAAAAEAAsAAAACAAAAAAAFAAsAAAACAAAAAAAGAAsAAAACAAAAAAAHAAsAAAACAAAAAAAIAAsAAAACAAAAAAAJAAsAAAACAAAAAAAKAAsAAAACAAAAAAALAAsAAAACAAAAAAAMAAsAAAACAAAAAAANAAsAAAACAAAAAAAOAAsAAAACAAAAAAAPAAsAAAACAAAAAAAQAAsAAAACAAAAAAARAAsAAAACAAAAAAASAAsAAAACAAAAAAATAAsAAAACAAAAAAAUAAsAAAACAAAAAAAVAAsAAAACAAAAAAAWAAsAAAACAAAAAAAXAAsAAAACAAAAAAAYAAsAAAACAAAAAAAZAAsAAAACAAAAAAAaAAsAAAACAAAAAAA=")
+tile_set = SubResource("TileSet_iywne")
+
+[node name="EnemyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Score" type="Label" parent="HUD"]
+offset_left = 7.0
+offset_top = 2.0
+offset_right = 47.0
+offset_bottom = 25.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "0"
+
+[node name="FinalMessage" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.0
+offset_top = -11.5
+offset_right = 43.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "You scored"
+
+[node name="FinalScore" type="Label" parent="HUD"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.5
+offset_top = 7.0
+offset_right = 20.5
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "0"
+horizontal_alignment = 1
+
+[node name="ScoreTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="SpeedTimer" type="Timer" parent="."]
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="SpeedTimer" to="." method="_on_speed_timer_timeout"]
